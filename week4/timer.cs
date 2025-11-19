@@ -5,12 +5,13 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     float timer;
+
     GameObject timerUI;
     int seconds = 0;
     int minutes = 0;
     void Start()
     {
-        timer = 110.0f;
+        timer = 0.0f;
         timerUI = GameObject.Find("timerText");
     }
 
@@ -23,6 +24,8 @@ public class Timer : MonoBehaviour
         seconds = (int)(timer % 60);
 
         Debug.Log(minutes + " : " + seconds);
+        timerUI.GetComponent<TextMeshProUGUI>().text = minutes.ToString("00") + " : " + seconds.ToString("00");
+
         if (timer > 120)
         {
             Debug.Log("Times up");
