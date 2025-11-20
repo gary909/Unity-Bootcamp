@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class DetectCollision : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class DetectCollision : MonoBehaviour
     TextMeshProUGUI messageText;
     bool startDisplayTimer;
     float displayTimer;
+    GameObject box1, box2, box3, box4;
+    int nbBoxesCollected = 0;
 
     void DisplayMessage(string message)
     {
@@ -40,6 +43,16 @@ public class DetectCollision : MonoBehaviour
         startDisplayTimer = false;
         displayTimer = 0.0f;
 
+        box1 = GameObject.Find("item1");
+        box2 = GameObject.Find("item2");
+        box3 = GameObject.Find("item3");
+        box4 = GameObject.Find("item4");
+
+        box1.SetActive(false);
+        box2.SetActive(false);
+        box3.SetActive(false);
+        box4.SetActive(false);
+
         // Check if the current scene is the starting scene of the game.
         if (currentSceneName == StartingSceneName)
         {
@@ -63,6 +76,23 @@ public class DetectCollision : MonoBehaviour
             startDisplayTimer = true;
             // Debug.Log("Just collided with" + nameOfObject);
             DisplayMessage("Just Collided with " + nameOfObject);
+            nbBoxesCollected = nbBoxesCollected + 1;
+            if (nbBoxesCollected == 1)
+            {
+                box1.SetActive(true);
+            }
+            if (nbBoxesCollected == 2)
+            {
+                box2.SetActive(true);
+            }
+            if (nbBoxesCollected == 3)
+            {
+                box3.SetActive(true);
+            }
+            if (nbBoxesCollected == 4)
+            {
+                box4.SetActive(true);
+            }
             Destroy(hit.gameObject);
             score = score + 1;
             
